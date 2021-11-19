@@ -16,8 +16,8 @@ public class Controller {
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public ResponseEntity<String> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) {
         Login login = new Login(name, password);
-        return new ResponseEntity<String>("Token", HttpStatus.OK);
- //       return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+//        return new ResponseEntity<String>("Token", HttpStatus.OK);
+        return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 //        return name;
     }
 
