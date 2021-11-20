@@ -10,7 +10,10 @@ import java.util.Base64;
 
 @Service
 public class LoginService {
-    public Boolean checkPasswordAtDB(String name, String password) {
+    public Boolean checkPasswordAtDB(UserRepositoryImpl userRepository, Login login) {
+      String askedName = login.getName();
+       String askedPassword = login.getPassword();
+//        User user = userRepository.findOne("'bulat'");
         return true;
     }
 

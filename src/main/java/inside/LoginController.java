@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @Autowired
     private LoginService loginService;
-
+    @Autowired
+    UserRepositoryImpl userRepository;
     private Token token = new Token();
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public ResponseEntity<Token> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) throws Exception {
         Login login = new Login(name, password);
-        if(loginService.checkPasswordAtDB(login.getName(), login.getPassword())) {
+        //  if(loginService.checkPasswordAtDB(login.getName(), login.getPassword())) {
 
+        if(loginService.checkPasswordAtDB(userRepository, login)) {
             loginService.createToken(token);
             return new ResponseEntity<Token>(token, HttpStatus.OK);
         } else
