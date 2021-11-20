@@ -1,7 +1,5 @@
 package inside;
 
-import java.util.Map;
-
 public class DataPost {
     private String name;
 
