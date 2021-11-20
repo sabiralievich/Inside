@@ -14,10 +14,14 @@ public class Controller {
     @Autowired
     private LoginService loginService;
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public ResponseEntity<String> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) {
+    public ResponseEntity<Token> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) throws Exception {
         Login login = new Login(name, password);
-//        return new ResponseEntity<String>("Token", HttpStatus.OK);
-        return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+        if(loginService.checkPasswordAtDB(login.getName(), login.getPassword())) {
+            Token token = new Token();
+            loginService.createToken(token);
+            return new ResponseEntity<Token>(token, HttpStatus.OK);
+        } else
+       return new ResponseEntity<Token>((Token) null, HttpStatus.UNAUTHORIZED);
 //        return name;
     }
 
