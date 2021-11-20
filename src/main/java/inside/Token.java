@@ -1,7 +1,7 @@
 package inside;
 
 public class Token {
-    private String token = "dasdsadasdasdddwe";
+    private String token;
 
     public Token() {  }
     public Token(String token){

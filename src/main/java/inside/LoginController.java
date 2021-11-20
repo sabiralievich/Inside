@@ -10,22 +10,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
+public class LoginController {
     @Autowired
     private LoginService loginService;
+
+    private Token token = new Token();
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public ResponseEntity<Token> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) throws Exception {
         Login login = new Login(name, password);
         if(loginService.checkPasswordAtDB(login.getName(), login.getPassword())) {
-            Token token = new Token();
+
             loginService.createToken(token);
             return new ResponseEntity<Token>(token, HttpStatus.OK);
         } else
-       return new ResponseEntity<Token>((Token) null, HttpStatus.UNAUTHORIZED);
+       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 //        return name;
     }
 
-/*    private static final String template = "Hello, %s!";
+    public Token getToken() {
+        return token;
+    }
+    /*    private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping("/greeting")
