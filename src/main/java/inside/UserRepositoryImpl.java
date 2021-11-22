@@ -1,4 +1,5 @@
 package inside;
+/*
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -8,10 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+*/
 
-@Repository
-public class UserRepositoryImpl implements UserRepository {
-    @Autowired
+
+public class UserRepositoryImpl /*implements UserRepository*/ {
+/*    @Autowired
     private JdbcOperations jdbc;
 
     private static final String SQL_FIND_ONE = "SELECT * FROM user WHERE name = ?";
@@ -48,5 +50,5 @@ public class UserRepositoryImpl implements UserRepository {
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new User(rs.getString("name"), rs.getString("password"));
         }
-    }
+    }*/
 }

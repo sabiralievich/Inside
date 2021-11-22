@@ -11,20 +11,23 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan
 @EnableAutoConfiguration
+//@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
 
- //       SpringApplication.run(Application.class, args);
-            ConfigurableApplicationContext ctx = new SpringApplication().run(Application.class, args);
+        SpringApplication.run(Application.class, args);
+        //ConfigurableApplicationContext ctx = new SpringApplication().run(Application.class, args);
 
  //       AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 
-            UserRepository userRepository = ctx.getBean(UserRepository.class);
+ //           UserRepository userRepository = ctx.getBean(UserRepository.class);
+/*
 
-/*            for(User t : userRepository.findAll()) {
+            for(User t : userRepository.findAll()) {
                 System.out.println(t.getName() + " " + t.getPassword());
-            }*/
+            }
+*/
 
 
     }
