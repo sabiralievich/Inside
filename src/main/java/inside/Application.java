@@ -22,11 +22,9 @@ public class Application {
 
             UserRepository userRepository = ctx.getBean(UserRepository.class);
 
-/*
-            for(User t : userRepository.findAll()) {
+/*            for(User t : userRepository.findAll()) {
                 System.out.println(t.getName() + " " + t.getPassword());
-            }
-*/
+            }*/
 
 
     }
