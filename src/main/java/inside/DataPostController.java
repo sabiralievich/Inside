@@ -21,7 +21,7 @@ public class DataPostController {
                 return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
             } else {
                 DataPost dataPost = new DataPost(name, body);
-                return new ResponseEntity<DataPost>(dataPost, HttpStatus.OK);
+                return new ResponseEntity<DataPost>(new DataPost("Service", "Data posted successfully"), HttpStatus.OK);
             }
 
         } else {
