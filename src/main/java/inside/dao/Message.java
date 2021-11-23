@@ -1,4 +1,4 @@
-package inside;
+package inside.dao;
 
 import javax.persistence.*;
 
@@ -16,7 +16,8 @@ public class Message {
     @OneToOne(mappedBy = "message")
     private User user;
 
-    public Message(){}
+    public Message() {
+    }
 
     public Message(String name, String text) {
 
@@ -52,6 +53,7 @@ public class Message {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

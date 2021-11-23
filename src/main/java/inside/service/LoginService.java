@@ -1,8 +1,12 @@
-package inside;
+package inside.service;
 
+import inside.dao.Message;
+import inside.dao.Token;
+import inside.dao.User;
+import inside.model.MessageRepository;
+import inside.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -18,28 +22,28 @@ public class LoginService {
     MessageRepository messageRepository;
 
     @PostConstruct
-    private void createTestUsers(){
+    private void createTestUsers() {
         User user = new User("bulat", "password");
         userRepository.save(user);
         User user1 = new User("test1", "test1");
         userRepository.save(user1);
     }
+
     @PostConstruct
-    private void createTestMessages(){
-        Message message1 = new Message(1l,"bulat", "testmessage1");
+    private void createTestMessages() {
+        Message message1 = new Message(1l, "bulat", "testmessage1");
         messageRepository.save(message1);
-        Message message2 = new Message(2l,"bulat","testmessage2");
+        Message message2 = new Message(2l, "bulat", "testmessage2");
         messageRepository.save(message2);
     }
 
     public Boolean checkPasswordAtDB(String name, String password) {
 
-      if(null == userRepository.findByNameAndPassword(name, password)) {
+        if (null == userRepository.findByNameAndPassword(name, password)) {
 
-          return false;
-      } else return true;
-//        User user = userRepository.findOne("'bulat'");
- //       return true;
+            return false;
+        } else return true;
+
     }
 
     public Token createToken(String name) throws Exception {
@@ -47,25 +51,12 @@ public class LoginService {
         final String SECRET_KEY = "cAtwa1kkEy";
         String header = "{ \"alg\": \"HS256\", \"typ\": \"JWT\"}";
         String payload = "{ \"userName\":" + "\"" + name + "\"" + "}";
-//        String unsignedToken = header + "." + payload;
         String unsignedToken = base64urlEncode(header) + "." + base64urlEncode(payload);
         String signature = createSignature(SECRET_KEY, unsignedToken);
         token.setToken(signature);
-//        System.out.println("unsignedToken:" +unsignedToken);
         return token;
     }
 
-/*    public void createToken(Token token) throws Exception {
-        final String SECRET_KEY = "cAtwa1kkEy";
-        String header = "{ \"alg\": \"HS256\", \"typ\": \"JWT\"}";
-        String payload = "{ \"userName\":" + "\"" + token.getToken() + "\"" +  "}";
-//        String unsignedToken = header + "." + payload;
-        String unsignedToken = base64urlEncode(header) + "." + base64urlEncode(payload);
-        String signature = createSignature(SECRET_KEY, unsignedToken);
-        token.setToken(signature);
-//        System.out.println("unsignedToken:" +unsignedToken);
-
-    }*/
     private String base64urlEncode(String raw) {
         return Base64.getUrlEncoder()
                 .withoutPadding()
@@ -79,8 +70,7 @@ public class LoginService {
         sha256_HMAC.init(secret_key);
         final byte[] mac_data = sha256_HMAC.doFinal(asciiCs.encode(data).array());
         String result = "";
-        for (final byte element : mac_data)
-        {
+        for (final byte element : mac_data) {
             result += Integer.toString((element & 0xff) + 0x100, 16).substring(1);
         }
         System.out.println("Result:[" + result + "]");

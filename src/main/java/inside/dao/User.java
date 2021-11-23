@@ -1,6 +1,6 @@
-package inside;
+package inside.dao;
 
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import inside.dao.Message;
 
 import javax.persistence.*;
 
@@ -38,6 +38,7 @@ public class User {
     public User() {
 
     }
+
     public User(String name, String password) {
         this.name = name;
         this.password = password;
