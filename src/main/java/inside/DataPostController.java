@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,7 +24,7 @@ public class DataPostController {
             if(body.equals("history 10")) {
   // Here to return 10 records from DB
  //              return dataPostService.getLastTen();
-                return new ResponseEntity<Message>(dataPostService.getLastTen(), HttpStatus.ACCEPTED);
+                return new ResponseEntity(dataPostService.getLastTen(), HttpStatus.ACCEPTED);
             } else {
                 dataPostService.postMessage(new Message(name, body));
                 return new ResponseEntity<>(null, HttpStatus.OK);
