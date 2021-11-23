@@ -17,7 +17,6 @@ public class DataPostService {
 
     public void postMessage(Message message) {
         messageRepository.save(message);
-        System.out.println("Saved");
     }
 
     public List<Message> getLastTen() {
