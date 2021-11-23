@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//@EnableJpaRepositories("UserRepository.java")
 public class DataPostController {
 
     @Autowired
@@ -22,14 +21,12 @@ public class DataPostController {
  //       System.out.println(loginService.createToken(name));
         if(loginService.createToken(name).getToken().equals(token)) {
             if(body.equals("history 10")) {
-  // Here to return 10 records from DB
- //              return dataPostService.getLastTen();
+
                 return new ResponseEntity(dataPostService.getLastTen(), HttpStatus.ACCEPTED);
             } else {
                 dataPostService.postMessage(new Message(name, body));
                 return new ResponseEntity<>(null, HttpStatus.OK);
- //               DataPost dataPost = new DataPost(name, body);
- //               return new ResponseEntity<DataPost>(new DataPost("Service", "Data posted successfully"), HttpStatus.OK);
+
             }
 
         } else {

@@ -13,9 +13,9 @@ public class Message {
 
     private String text;
 
-  /*  @OneToOne(mappedBy = "message")
+    @OneToOne(mappedBy = "message")
     private User user;
-*/
+
     public Message(){}
 
     public Message(String name, String text) {

@@ -13,7 +13,7 @@ public class User {
 
     private String name;
     private String password;
-/*
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "message_id", referencedColumnName = "id")
     private Message message;
@@ -24,7 +24,7 @@ public class User {
 
     public void setMessage(Message message) {
         this.message = message;
-    }*/
+    }
 
     public Long getId() {
         return id;
