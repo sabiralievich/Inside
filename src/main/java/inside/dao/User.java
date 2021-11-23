@@ -1,6 +1,6 @@
-package inside;
+package inside.dao;
 
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import inside.dao.Message;
 
 import javax.persistence.*;
 
@@ -13,7 +13,7 @@ public class User {
 
     private String name;
     private String password;
-/*
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "message_id", referencedColumnName = "id")
     private Message message;
@@ -24,7 +24,7 @@ public class User {
 
     public void setMessage(Message message) {
         this.message = message;
-    }*/
+    }
 
     public Long getId() {
         return id;
@@ -38,6 +38,7 @@ public class User {
     public User() {
 
     }
+
     public User(String name, String password) {
         this.name = name;
         this.password = password;
