@@ -7,12 +7,24 @@ import javax.persistence.*;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;
     private String password;
+/*
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "message_id", referencedColumnName = "id")
+    private Message message;
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }*/
 
     public Long getId() {
         return id;
@@ -21,6 +33,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public User() {
 

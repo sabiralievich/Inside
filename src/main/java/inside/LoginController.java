@@ -15,16 +15,24 @@ public class LoginController {
     @Autowired
     LoginService loginService;
     @Autowired
-    inside.UserRepository userRepository;
+    UserRepository userRepository;
     private Token token = new Token();
+
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public ResponseEntity<Token> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) throws Exception {
+    public ResponseEntity<Token> login(@RequestParam(value = "name", required = true) String name, @RequestParam(value = "password", required = true) String password) throws Exception {
+//        Login login = new Login(name, password);
+        if (loginService.checkPasswordAtDB(name, password)) {
+            return new ResponseEntity<Token>(loginService.createToken(name), HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+ /*   public ResponseEntity<Token> login(@RequestParam(value="name", required = true) String name, @RequestParam(value="password", required = true) String password) throws Exception {
         Login login = new Login(name, password);
         //  if(loginService.checkPasswordAtDB(login.getName(), login.getPassword())) {
 //        if(loginService.checkPasswordAtDB(userRepository, login)) {
-/*        try {
-            userRepository.findByNameAndPassword(login.getName(), login.getPassword());
-            loginService.createToken(token);
+        System.out.println(userRepository.findByNameAndPassword("test", "test").getName());
+        try {
+            userRepository.findByNameAndPassword(name, password);
             return new ResponseEntity<Token>(token, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -34,12 +42,14 @@ public class LoginController {
             loginService.createToken(token);
             return new ResponseEntity<Token>(token, HttpStatus.OK);
         } else */
-       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 //        return name;
-    }
+//}
+/*
 
     public Token getToken() {
         return token;
     }
+*/
 
 }

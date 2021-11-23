@@ -12,18 +12,22 @@ import java.util.Map;
 public class DataPostController {
 
     @Autowired
-    private LoginController loginController;
+    private LoginService loginService;
+    @Autowired DataPostService dataPostService;
     @RequestMapping(method = RequestMethod.POST, value = "/postdata")
-   public ResponseEntity<DataPost> newDataPost(@RequestBody String body, @RequestHeader Map<String, String> headers, @RequestParam(value="name", required = true) String name) throws Exception {
+   public ResponseEntity<Message> newDataPost(@RequestBody String body, @RequestHeader Map<String, String> headers, @RequestParam(value="name", required = true) String name) throws Exception {
         String token = headers.get("token");
-
-        if(loginController.getToken().getToken().equals(token)) {
+ //       System.out.println(loginService.createToken(name));
+        if(loginService.createToken(name).getToken().equals(token)) {
             if(body.equals("history 10")) {
   // Here to return 10 records from DB
-                return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+ //              return dataPostService.getLastTen();
+                return new ResponseEntity<Message>(dataPostService.getLastTen(), HttpStatus.ACCEPTED);
             } else {
-                DataPost dataPost = new DataPost(name, body);
-                return new ResponseEntity<DataPost>(new DataPost("Service", "Data posted successfully"), HttpStatus.OK);
+                dataPostService.postMessage(new Message(name, body));
+                return new ResponseEntity<>(null, HttpStatus.OK);
+ //               DataPost dataPost = new DataPost(name, body);
+ //               return new ResponseEntity<DataPost>(new DataPost("Service", "Data posted successfully"), HttpStatus.OK);
             }
 
         } else {
