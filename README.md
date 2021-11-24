@@ -1,3 +1,3 @@
 Test Users:
-name: bulat password: password
-name: test1 password: test1
+| name: bulat password: password
+| name: test1 password: test1
