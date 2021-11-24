@@ -17,13 +17,15 @@ docker pull sabiralievich/inside:backend<br/><br/>
 | name: **bulat** password: **password**<br/>
 | name: **test1** password: **test1**<br/>
 
-### 4. Для запросов в первый endpoint (авторизация) используется url: <br/>
+### 4. Для создания запросов использовать любое стороннее приложение. Далее используется Postman.
+
+### 5. Для запросов в первый endpoint (авторизация) используется url: <br/>
 http://localhost:8080/login<br/>
 
 ### 5. Для запросов во второй endpoint (работа с данными) используется url:<br/>
 http://localhost:8080/postdata<br/>
 
-### 6. Валидация входных данных не выполняется.<br/>
+### 7. Валидация входных данных не выполняется.<br/>
 
 ### Пример запроса на авторизацию:<br/>
 ![image](https://user-images.githubusercontent.com/84394882/143309097-995b7693-16e4-4d7d-9c73-be0f05b79dc7.png)
