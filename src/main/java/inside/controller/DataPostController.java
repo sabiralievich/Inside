@@ -19,18 +19,15 @@ public class DataPostController {
     DataPostService dataPostService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postdata")
-    public ResponseEntity newDataPost(@RequestBody String body, @RequestHeader Map<String, String> headers, @RequestParam(value = "name") String name) throws Exception {
+    public ResponseEntity newDataPost(@RequestBody Message message, @RequestHeader Map<String, String> headers) throws Exception {
         String token = headers.get("token");
-        if (loginService.createToken(name).getToken().equals(token)) {
-            if (body.equals("history 10")) {
-
+        if (loginService.createToken(message.getName()).getToken().equals(token)) {
+            if (message.getText().equals("history 10")) {
                 return new ResponseEntity(dataPostService.getLastTen(), HttpStatus.ACCEPTED);
             } else {
-                dataPostService.postMessage(new Message(name, body));
+                dataPostService.postMessage(message);
                 return new ResponseEntity<>(null, HttpStatus.OK);
-
             }
-
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
